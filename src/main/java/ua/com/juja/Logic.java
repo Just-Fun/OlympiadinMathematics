@@ -21,7 +21,7 @@ public class Logic {
     public void run(File input, File output) {
         this.input = input;
         this.output = output;
-        createNamesAndTasksFromFile();
+        createNamesAndTasksFromFile(input, names);
         makeThread();
         startThreads();
     }
@@ -32,7 +32,7 @@ public class Logic {
         }
     }
 
-    public void createNamesAndTasksFromFile() {
+    public void createNamesAndTasksFromFile(File input, List<String> names) {
         try (BufferedReader br = new BufferedReader(new FileReader(input))) {
             String line;
             boolean switchOnTasks = false;
