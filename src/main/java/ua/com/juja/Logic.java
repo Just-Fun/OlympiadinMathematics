@@ -21,8 +21,8 @@ public class Logic {
     public void run(File input, File output) {
         this.input = input;
         this.output = output;
-        createNamesAndTasksFromFile(input, names);
-        makeThread();
+        createNamesAndTasksFromFile(input, names, tasks);
+        makeThread(names, threads);
         startThreads();
     }
 
@@ -32,7 +32,7 @@ public class Logic {
         }
     }
 
-    public void createNamesAndTasksFromFile(File input, List<String> names) {
+    public void createNamesAndTasksFromFile(File input, List<String> names, List<String> tasks) {
         try (BufferedReader br = new BufferedReader(new FileReader(input))) {
             String line;
             boolean switchOnTasks = false;
@@ -55,7 +55,7 @@ public class Logic {
         }
     }
 
-    public void makeThread() {
+    public void makeThread(List<String> names, List<Thread> threads) {
         for (String name : names) {
             Thread thread = new Thread(() -> {
                 synchronized (Logic.class) {
