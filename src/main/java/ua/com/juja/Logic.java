@@ -23,7 +23,7 @@ public class Logic {
         this.output = output;
         clearFile(output);
         createNamesAndTasksFromFile(input, names, tasks);
-        makeThread(names);
+        createThreadsAndStartEachOne(names);
     }
 
     public void clearFile(File output) {
@@ -61,18 +61,18 @@ public class Logic {
         }
     }
 
-    public void makeThread(List<String> names) {
+    public void createThreadsAndStartEachOne(List<String> names) {
         for (String name : names) {
             new Thread(() -> {
                 while (nextTask < taskLength) {
                     int index = getNextTask();
-                    if (index >= taskLength) {
+                    if (index >= taskLength) { // TODO костыль, подумать как убрать
                         break;
                     }
                     String stringInFile = getAndResolveTask(name, index);
                     writeResultInFile(output.getAbsolutePath(), stringInFile);
                     try {
-                        Thread.sleep(1);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -83,13 +83,10 @@ public class Logic {
 
     private String getAndResolveTask(String name, int index) {
         String task = tasks.get(index);
-        String countResult = Solver.calculate(task);//"99";//count(task); // TODO отремарить, поставил пока заглушку
+        String countResult = Solver.calculate(task);
+//        String countResult = ExampleSolver.count(task); // TODO попробовать реализацию Оли
         String result = name + ";" + task + ";" + countResult + "\n";
         return result;
-    }
-
-    public String count(String task) {
-        return ExampleSolver.count(task);
     }
 
     public static void writeResultInFile(String file, String str) {
@@ -98,7 +95,7 @@ public class Logic {
             writer = new BufferedWriter(new FileWriter(file, true));
             writer.write(str);
             writer.flush();
-            System.out.println("Записано в файл " + str);
+            System.out.print("Записано в файл " + str);
         } catch (IOException e1) {
             throw new RuntimeException("Не вышло записать в файл", e1.getCause());
         } finally {

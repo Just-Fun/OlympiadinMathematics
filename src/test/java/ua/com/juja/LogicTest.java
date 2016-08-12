@@ -59,11 +59,4 @@ public class LogicTest {
         String check = utils.read(new File("src/test/resources/testOutput2.txt"));
         assertEquals(("Test writing").replaceAll("\r\n", "\n"), check);
     }
-
-    @Ignore
-    @Test
-    public void count() {
-        assertEquals("2", logic.count("1+1"));
-    }
-
 }
