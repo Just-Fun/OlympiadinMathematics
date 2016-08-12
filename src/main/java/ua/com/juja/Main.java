@@ -12,7 +12,7 @@ public class Main {
         doWork(input, output);
     }
 
-    private static void doWork(File input, File output) {
+    public static void doWork(File input, File output) {
         try (BufferedReader br = new BufferedReader(new FileReader(input))) {
             String line;
             while ((line = br.readLine()) != null && !(line = br.readLine()).equals("#")) {
