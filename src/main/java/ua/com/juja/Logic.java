@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Serzh on 8/12/16.
  */
-public class Users {
+public class Logic {
     List<String> names = new ArrayList<>();
     List<String> tasks = new ArrayList<>();
     private File output;
@@ -18,7 +18,7 @@ public class Users {
     static int nextTask = 0;
     int taskLength = tasks.size();
 
-    public Users(List<String> names, List<String> tasks, File output) {
+    public Logic(List<String> names, List<String> tasks, File output) {
         this.names = names;
         this.tasks = tasks;
         this.output = output;
@@ -33,12 +33,11 @@ public class Users {
         }
     }
 
-    private synchronized void someLogic(String name) {
-        synchronized (Users.class) {
+    private void someLogic(String name) {
+        synchronized (Logic.class) {
             while (nextTask++ < taskLength) {
                 String task = tasks.get(nextTask);
                 StringToFile(name, task);
-
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -52,7 +51,6 @@ public class Users {
         String result = name + ";" + task + ";" + count(task);
         write(output.getAbsolutePath(), result);
     }
-
 
 
     private String count(String task) {
