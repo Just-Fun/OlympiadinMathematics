@@ -1,9 +1,6 @@
 package ua.com.juja;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,54 +8,84 @@ import java.util.List;
  * Created by Serzh on 8/12/16.
  */
 public class Logic {
+    private File input;
+    private File output;
+
     List<String> names = new ArrayList<>();
     List<String> tasks = new ArrayList<>();
-    private File output;
     List<Thread> threads = new ArrayList<>();
+
     static int nextTask = 0;
     int taskLength = tasks.size();
 
-    public Logic(List<String> names, List<String> tasks, File output) {
-        this.names = names;
-        this.tasks = tasks;
+    public void run(File input, File output) {
+        this.input = input;
         this.output = output;
+        createNamesAndTasksFromFile();
+        makeThread();
+        startThreads();
+    }
+
+    private void startThreads() {
+        for (Thread thread : threads) {
+            thread.start();
+        }
+    }
+
+    public void createNamesAndTasksFromFile() {
+        try (BufferedReader br = new BufferedReader(new FileReader(input))) {
+            String line;
+            boolean switchOnTasks = false;
+            while ((line = br.readLine()) != null) {
+                if (line.equals("#")) {
+                    switchOnTasks = true;
+                }
+                if (!switchOnTasks) {
+                    names.add(line);
+                } else {
+                    if (!line.equals("#")) {
+                        tasks.add(line);
+                    }
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException");
+        } catch (IOException e) {
+            System.out.println("IOException");
+        }
     }
 
     public void makeThread() {
         for (String name : names) {
             Thread thread = new Thread(() -> {
-                someLogic(name);
+                synchronized (Logic.class) {
+                    while (nextTask++ < taskLength) {
+                        String stringInFile = getAndResolveTask(name);
+                        writeResultInFile(output.getAbsolutePath(), stringInFile);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             });
             threads.add(thread);
         }
     }
 
-    private void someLogic(String name) {
-        synchronized (Logic.class) {
-            while (nextTask++ < taskLength) {
-                String task = tasks.get(nextTask);
-                StringToFile(name, task);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    private String getAndResolveTask(String name) {
+        String task = tasks.get(nextTask);
+        String countResult = count(task);
+        return name + ";" + task + ";" + countResult;
     }
-
-    private void StringToFile(String name, String task) {
-        String result = name + ";" + task + ";" + count(task);
-        write(output.getAbsolutePath(), result);
-    }
-
 
     private String count(String task) {
         // calculate
         return "";
     }
 
-    public static void write(String file, String str) {
+    public static void writeResultInFile(String file, String str) {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(file));
