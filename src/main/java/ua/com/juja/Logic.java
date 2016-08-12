@@ -83,7 +83,7 @@ public class Logic {
 
     private String getAndResolveTask(String name, int index) {
         String task = tasks.get(index);
-        String countResult = "99";//count(task); // TODO отремарить, поставил пока заглушку
+        String countResult = Solver.calculate(task);//"99";//count(task); // TODO отремарить, поставил пока заглушку
         String result = name + ";" + task + ";" + countResult + "\n";
         return result;
     }

@@ -28,4 +28,18 @@ public class Utils {
         }
         return result.substring(0, result.length() - 1);
     }
+
+    public static void createFile(String path) {
+        try {
+            File file = new File(path);
+            if (file.createNewFile()) {
+                System.out.println("File is created!");
+            } else {
+                System.out.println("File already exists.");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

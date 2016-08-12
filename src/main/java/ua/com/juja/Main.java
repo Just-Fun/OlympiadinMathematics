@@ -1,8 +1,6 @@
 package ua.com.juja;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Serzh on 8/12/16.
