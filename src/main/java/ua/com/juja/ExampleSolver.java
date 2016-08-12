@@ -4,8 +4,12 @@ import java.util.Stack;
 
 public class ExampleSolver {
     public static void main(String[] args) {
-        String[] arr = {"3","3","+"};
+        String[] arr = {"3","4","+"};
+        String[] arr1 = {"1","2","+","4","*","5","+","3","-"};
+        String[] arr2 = {"5","1","2","+","4","*","+","3","-"};
         System.out.println(stackMachine(arr));
+        System.out.println(stackMachine(arr1));
+        System.out.println(stackMachine(arr2));
     }
 
     public static String count(String task) {
@@ -25,18 +29,20 @@ public class ExampleSolver {
             try {
                 stack.push(Double.parseDouble(arr[i]));
             } catch (NumberFormatException e) {
+                double b = stack.pop();
+                double a = stack.pop();
                 switch (arr[i]) {
                     case "+":
-                        stack.push(stack.pop() + stack.pop());
+                        stack.push(a + b);
                         break;
                     case "-":
-                        stack.push(stack.pop() - stack.pop());
+                        stack.push(a - b);
                         break;
                     case "*":
-                        stack.push(stack.pop() * stack.pop());
+                        stack.push(a * b);
                         break;
                     case "/":
-                        stack.push(stack.pop() / stack.pop());
+                        stack.push(a / b);
                         break;
                 }
             }
