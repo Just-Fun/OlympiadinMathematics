@@ -1,37 +1,51 @@
 package ua.com.juja;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Serzh on 8/12/16.
  */
 public class Main {
+    List<String> names = new ArrayList<>();
+    List<String> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
         File input = new File("src/main/resources/input.txt");
         File output = new File("src/main/resources/output.txt");
-        doWork(input, output);
+        new Main().doWork(input, output);
     }
 
-    public static void doWork(File input, File output) {
+    private void doWork(File input, File output) {
+        readFile(input);
+        new Users(names, tasks).makeThread();
+    }
+
+    public void readFile(File input) {
         try (BufferedReader br = new BufferedReader(new FileReader(input))) {
             String line;
-            while ((line = br.readLine()) != null && !(line = br.readLine()).equals("#")) {
-                // something with threads
-                // process the line.
-            }
-
+            boolean switchOnTasks = false;
             while ((line = br.readLine()) != null) {
-                // solved examples
-                // process the line.
+                if (line.equals("#")) {
+                    switchOnTasks = true;
+                }
+                if (!switchOnTasks) {
+                    names.add(line);
+                } else {
+                    if (!line.equals("#")) {
+                        tasks.add(line);
+                    }
+                }
             }
-        }catch (FileNotFoundException ex){
+        } catch (FileNotFoundException ex) {
             System.out.println("FileNotFoundException");
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("IOException");
         }
     }
 
-    public static void write(String file, String str) {
+    /*public static void write(String file, String str) {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(file));
@@ -47,7 +61,5 @@ public class Main {
                     e.printStackTrace();
                 }
         }
-    }
-
-
+    }*/
 }
