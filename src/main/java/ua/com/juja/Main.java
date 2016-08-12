@@ -19,7 +19,7 @@ public class Main {
 
     private void doWork(File input, File output) {
         readFile(input);
-        new Users(names, tasks).makeThread();
+        new Users(names, tasks, output).makeThread();
     }
 
     public void readFile(File input) {
@@ -45,21 +45,5 @@ public class Main {
         }
     }
 
-    /*public static void write(String file, String str) {
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(file));
-            writer.write(str);
-            writer.flush();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        } finally {
-            if (writer != null)
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-        }
-    }*/
+
 }
