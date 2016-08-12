@@ -81,8 +81,7 @@ public class Logic {
     }
 
     private String count(String task) {
-        // calculate
-        return "";
+        return ExampleSolver.count(task);
     }
 
     public static void writeResultInFile(String file, String str) {
