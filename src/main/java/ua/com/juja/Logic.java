@@ -80,7 +80,7 @@ public class Logic {
         return name + ";" + task + ";" + countResult;
     }
 
-    private String count(String task) {
+    public String count(String task) {
         return ExampleSolver.count(task);
     }
 

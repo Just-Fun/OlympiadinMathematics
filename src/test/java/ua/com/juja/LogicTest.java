@@ -1,6 +1,7 @@
 package ua.com.juja;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -63,6 +64,12 @@ public class LogicTest {
        logic.writeResultInFile("src/test/resources/testOutput2.txt", "Test writing");
         String check = utils.read(new File("src/test/resources/testOutput2.txt"));
         assertEquals(("Test writing").replaceAll("\r\n", "\n"), check);
+    }
+
+    @Ignore
+    @Test
+    public void count() {
+        assertEquals("2", logic.count("1+1"));
     }
 
 }
