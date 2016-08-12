@@ -2,8 +2,6 @@ package ua.com.juja;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Serzh on 8/12/16.
  */
