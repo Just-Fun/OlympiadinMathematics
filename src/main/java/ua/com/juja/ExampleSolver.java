@@ -10,11 +10,17 @@ public class ExampleSolver {
         System.out.println(count(arr));
         arr = "35+40*2/(10-5*7)";
         System.out.println(count(arr));
+        arr = "6-(2+(1*3)*2)";
+        System.out.println(count(arr));
+        arr = "60-(2+1*3*2)";
+        System.out.println(count(arr));
+        arr = "5+0/(10-5)+2";
+        System.out.println(count(arr));
     }
 
     public static String count(String task) {
         String[] parsedTask = parseToRPN(task);
-        String res = String.valueOf(stackMachine(parsedTask));
+        String res = stackMachine(parsedTask);
         return (res.substring(res.length()-2)).equals(".0") ? res.substring(0,res.length()-2) : res;
     }
 
@@ -24,37 +30,34 @@ public class ExampleSolver {
 
         for (int i = 0; i < task.length(); i++) {
             char c = task.charAt(i);
-            if (Character.isDigit(c)) { //TODO rewrite it
-                while (Character.isDigit(c)) {
-                    string.append(c);
-                    c = task.charAt(++i);
-                }
-                i--;
-                string.append(' ');
+            if (Character.isDigit(c)) {
+                string.append(c);
             } else if (c == '(') {
+                string.append(' ');
                 stack.push(c);
             } else if (c == ')') {
                 c = stack.pop();
                 while (c != '(') {
-                    string.append(c);
                     string.append(' ');
+                    string.append(c);
                     c = stack.pop();
                 }
             } else {
                 while (!stack.empty() && (getPriority(c) <= getPriority(stack.peek()))) {
-                    string.append(stack.pop());
                     string.append(' ');
+                    string.append(stack.pop());
                 }
+                string.append(' ');
                 stack.push(c);
             }
         }
 
         while (!stack.empty()) {
-            string.append(stack.pop());
             string.append(' ');
+            string.append(stack.pop());
         }
-        string.deleteCharAt(string.length() - 1);
-        return string.toString().split(" ");
+        System.out.println(string.toString());
+        return string.toString().replace("  "," ").split(" ");
     }
 
     private static int getPriority(char c) {
@@ -74,7 +77,7 @@ public class ExampleSolver {
     }
 
 
-    private static double stackMachine(String[] arr) {
+    private static String stackMachine(String[] arr) {
         Stack<Double> stack = new Stack<>();
         for (int i = 0; i < arr.length; i++) {
             try {
@@ -92,12 +95,13 @@ public class ExampleSolver {
                     case "*":
                         stack.push(a * b);
                         break;
-                    case "/":// TODO: if b are zero send message
+                    case "/":
+                        if (b == 0) return "Division on zero";
                         stack.push(a / b);
                         break;
                 }
             }
         }
-        return Math.ceil(stack.pop()*100)/100;
+        return String.valueOf(Math.ceil(stack.pop()*100)/100);
     }
 }
