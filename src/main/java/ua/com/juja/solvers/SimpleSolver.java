@@ -8,11 +8,7 @@ import javax.script.ScriptException;
 /**
  * Created by Serzh on 8/12/16.
  */
-public class Solver {
-    public static void main(String[] args) {
-        System.out.println(calculate("6-(2+(1*3)*2)"));
-        System.out.println(calculate("( 1 + 2 ) * ( 3 / 4 ) - ( 5 + 6 )"));
-    }
+public class SimpleSolver {
 
     public static String calculate(String task) {
         ScriptEngineManager mgr = new ScriptEngineManager();

@@ -1,8 +1,6 @@
 package ua.com.juja;
 
-import ua.com.juja.solvers.ExampleSolver;
-import ua.com.juja.solvers.ExpressionParser;
-import ua.com.juja.solvers.Solver;
+import ua.com.juja.solvers.SimpleSolver;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -86,7 +84,7 @@ public class Logic {
 
 // Разные реализации :)
     private String getAndResolveTask(String name, String task) {
-        String countResult = Solver.calculate(task);
+        String countResult = SimpleSolver.calculate(task);
 //        String countResult = ExpressionParser.run(task);
 //        String countResult = ExampleSolver.count(task);
         System.out.println(name + " решил задание, ответ: " + countResult);
