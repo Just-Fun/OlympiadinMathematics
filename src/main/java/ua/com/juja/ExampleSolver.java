@@ -33,7 +33,6 @@ public class ExampleSolver {
             if (Character.isDigit(c)) {
                 string.append(c);
             } else if (c == '(') {
-                string.append(' ');
                 stack.push(c);
             } else if (c == ')') {
                 c = stack.pop();
@@ -51,12 +50,10 @@ public class ExampleSolver {
                 stack.push(c);
             }
         }
-
         while (!stack.empty()) {
             string.append(' ');
             string.append(stack.pop());
         }
-        System.out.println(string.toString());
         return string.toString().replace("  "," ").split(" ");
     }
 
