@@ -21,7 +21,7 @@ public class ExampleSolver {
     public static String count(String task) {
         String[] parsedTask = parseToRPN(task);
         String res = stackMachine(parsedTask);
-        return (res.substring(res.length()-2)).equals(".0") ? res.substring(0,res.length()-2) : res;
+        return (res.substring(res.length() - 2)).equals(".0") ? res.substring(0, res.length() - 2) : res;
     }
 
     private static String[] parseToRPN(String task) {
@@ -54,7 +54,7 @@ public class ExampleSolver {
             string.append(' ');
             string.append(stack.pop());
         }
-        return string.toString().replace("  "," ").split(" ");
+        return string.toString().replace("  ", " ").split(" ");
     }
 
     private static int getPriority(char c) {
@@ -99,6 +99,6 @@ public class ExampleSolver {
                 }
             }
         }
-        return String.valueOf(Math.ceil(stack.pop()*100)/100);
+        return String.valueOf(Math.ceil(stack.pop() * 100) / 100);
     }
 }

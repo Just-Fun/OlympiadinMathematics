@@ -44,11 +44,10 @@ public class Logic {
             while ((line = br.readLine()) != null) {
                 if (line.equals("#")) {
                     switchOnTasks = true;
-                }
-                if (!switchOnTasks) {
-                    names.add(line);
                 } else {
-                    if (!line.equals("#")) {
+                    if (!switchOnTasks) {
+                        names.add(line);
+                    } else {
                         tasks.add(line);
                     }
                 }
@@ -83,8 +82,8 @@ public class Logic {
 
     private String getAndResolveTask(String name, int index) {
         String task = tasks.get(index);
-        String countResult = Solver.calculate(task);
-//        String countResult = ExampleSolver.count(task); // TODO попробовать реализацию Оли
+//        String countResult = Solver.calculate(task);
+        String countResult = ExampleSolver.count(task); // TODO попробовать реализацию Оли
         String result = name + ";" + task + ";" + countResult + "\n";
         return result;
     }
