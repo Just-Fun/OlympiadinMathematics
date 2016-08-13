@@ -82,26 +82,16 @@ public class Logic {
         String task = tasks.get(index);
 //        String countResult = Solver.calculate(task);
         String countResult = ExampleSolver.count(task); // TODO попробовать реализацию Оли
-        String result = name + ";" + task + ";" + countResult + "\n";
-        return result;
+        return name + ";" + task + ";" + countResult + "\n";
     }
 
     public static void writeResultInFile(String file, String str) {
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(file, true));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
             writer.write(str);
             writer.flush();
             System.out.print("Записано в файл " + str);
         } catch (IOException e1) {
             throw new RuntimeException("Не вышло записать в файл", e1.getCause());
-        } finally {
-            if (writer != null)
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    throw new RuntimeException("Не вышло закрыть writer", e.getCause());
-                }
         }
     }
 }
