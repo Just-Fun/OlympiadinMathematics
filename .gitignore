@@ -1,0 +1,7 @@
+.idea/vcs.xml
+.DS_Store
+.idea/
+OlympiadinMathematics.iml
+src/.DS_Store
+src/test/.DS_Store
+target/

@@ -80,8 +80,8 @@ public class Logic {
 
     private String getAndResolveTask(String name, int index) {
         String task = tasks.get(index);
-//        String countResult = Solver.calculate(task);
-        String countResult = ExampleSolver.count(task); // TODO попробовать реализацию Оли
+//        String countResult = Solver.calculate(task); // TODO допилить(округлить до двух знаков после точки)
+        String countResult = ExampleSolver.count(task);
         return name + ";" + task + ";" + countResult + "\n";
     }
 
