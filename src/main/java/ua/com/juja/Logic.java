@@ -63,11 +63,8 @@ public class Logic {
     public void createThreadsAndStartEachOne(List<String> names) {
         for (String name : names) {
             new Thread(() -> {
-                while (nextTask < taskLength) {
-                    int index = getNextTask();
-                    if (index >= taskLength) { // TODO костыль, подумать как убрать
-                        break;
-                    }
+                int index = getNextTask();
+                while (index < taskLength) {
                     String stringInFile = getAndResolveTask(name, index);
                     writeResultInFile(output.getAbsolutePath(), stringInFile);
                     try {
@@ -75,6 +72,7 @@ public class Logic {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    index = getNextTask();
                 }
             }).start();
         }
