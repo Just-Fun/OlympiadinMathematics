@@ -4,7 +4,9 @@ import ua.com.juja.solvers.SimpleSolver;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Serzh on 8/12/16.
@@ -13,6 +15,8 @@ public class Logic {
     private File output;
     List<String> names = new ArrayList<>();
     List<String> tasks = new ArrayList<>();
+    Map<String, Long> spentTime = new HashMap<>();
+    Map<String, Integer> solvedTasks = new HashMap<>();
 
     int taskLength;
     static volatile int nextTask = 0;
@@ -25,7 +29,15 @@ public class Logic {
         this.output = output;
         clearFile(output);
         createNamesAndTasksFromFile(input, names, tasks);
+        createMapsSolvedTaskAndSpentTime();
         createThreadsAndStartEachOne(names);
+    }
+
+    private void createMapsSolvedTaskAndSpentTime() {
+        for (String name : names) {
+            spentTime.put(name, new Long(0));
+            solvedTasks.put(name, new Integer(0));
+        }
     }
 
     public void clearFile(File output) {
