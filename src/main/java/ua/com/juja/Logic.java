@@ -1,5 +1,7 @@
 package ua.com.juja;
 
+import ua.com.juja.solvers.ExampleSolver;
+import ua.com.juja.solvers.ExpressionParser;
 import ua.com.juja.solvers.Solver;
 
 import java.io.*;
@@ -69,7 +71,7 @@ public class Logic {
                 while (index < taskLength) {
                     String task = tasks.get(index);
                     System.out.println(name + " взял задание: " + task);
-                    String stringInFile = resolveTask(name, task);
+                    String stringInFile = getAndResolveTask(name, task);
                     writeResultInFile(output.getAbsolutePath(), stringInFile);
                     try {
                         Thread.sleep(100);
@@ -83,10 +85,11 @@ public class Logic {
     }
 
 // Разные реализации :)
-    private String resolveTask(String name, String task) {
+    private String getAndResolveTask(String name, String task) {
         String countResult = Solver.calculate(task);
 //        String countResult = ExpressionParser.run(task);
 //        String countResult = ExampleSolver.count(task);
+        System.out.println(name + " решил задание, ответ: " + countResult);
         return name + ";" + task + ";" + countResult + "\n";
     }
 
@@ -94,7 +97,7 @@ public class Logic {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
             writer.write(str);
             writer.flush();
-            System.out.print("Записано в файл " + str);
+            System.out.print("Записано: " + str);
         } catch (IOException e1) {
             throw new RuntimeException("Не вышло записать в файл", e1.getCause());
         }
