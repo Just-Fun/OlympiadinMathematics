@@ -1,5 +1,7 @@
 package ua.com.juja;
 
+import ua.com.juja.solvers.Solver;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +67,9 @@ public class Logic {
             new Thread(() -> {
                 int index = getNextTask();
                 while (index < taskLength) {
-                    String stringInFile = getAndResolveTask(name, index);
+                    String task = tasks.get(index);
+                    System.out.println(name + " взял задание: " + task);
+                    String stringInFile = resolveTask(name, task);
                     writeResultInFile(output.getAbsolutePath(), stringInFile);
                     try {
                         Thread.sleep(100);
@@ -78,10 +82,11 @@ public class Logic {
         }
     }
 
-    private String getAndResolveTask(String name, int index) {
-        String task = tasks.get(index);
-//        String countResult = Solver.calculate(task); // TODO допилить(округлить до двух знаков после точки)
-        String countResult = ExampleSolver.count(task);
+// Разные реализации :)
+    private String resolveTask(String name, String task) {
+        String countResult = Solver.calculate(task);
+//        String countResult = ExpressionParser.run(task);
+//        String countResult = ExampleSolver.count(task);
         return name + ";" + task + ";" + countResult + "\n";
     }
 

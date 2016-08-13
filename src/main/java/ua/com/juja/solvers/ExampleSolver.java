@@ -1,4 +1,4 @@
-package ua.com.juja;
+package ua.com.juja.solvers;
 
 import java.util.Stack;
 
