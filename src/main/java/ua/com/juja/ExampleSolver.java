@@ -6,12 +6,16 @@ public class ExampleSolver {
     public static void main(String[] args) {
         String arr = "35+40*2/(10-5)";
         System.out.println(count(arr));
+        arr = "35+40*2/(10-3)";
+        System.out.println(count(arr));
+        arr = "35+40*2/(10-5*7)";
+        System.out.println(count(arr));
     }
 
     public static String count(String task) {
         String[] parsedTask = parseToRPN(task);
         String res = String.valueOf(stackMachine(parsedTask));
-        return (res.substring(res.length()-2)).equals(".0") ? res.substring(res.length()-2) : res;
+        return (res.substring(res.length()-2)).equals(".0") ? res.substring(0,res.length()-2) : res;
     }
 
     private static String[] parseToRPN(String task) {
@@ -88,12 +92,12 @@ public class ExampleSolver {
                     case "*":
                         stack.push(a * b);
                         break;
-                    case "/":
+                    case "/":// TODO: if b are zero send message
                         stack.push(a / b);
                         break;
                 }
             }
         }
-        return stack.pop();//TODO: round result
+        return Math.ceil(stack.pop()*100)/100;
     }
 }
