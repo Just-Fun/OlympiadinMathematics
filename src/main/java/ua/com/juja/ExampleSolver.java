@@ -4,26 +4,77 @@ import java.util.Stack;
 
 public class ExampleSolver {
     public static void main(String[] args) {
-        String[] arr = {"3","4","+"};
-        String[] arr1 = {"1","2","+","4","*","5","+","3","-"};
-        String[] arr2 = {"5","1","2","+","4","*","+","3","-"};
-        System.out.println(stackMachine(arr));
-        System.out.println(stackMachine(arr1));
-        System.out.println(stackMachine(arr2));
+        String arr = "35+40*2/(10-5)";
+        System.out.println(count(arr));
+        arr = "35+40*2/(10-3)";
+        System.out.println(count(arr));
+        arr = "35+40*2/(10-5*7)";
+        System.out.println(count(arr));
+        arr = "6-(2+(1*3)*2)";
+        System.out.println(count(arr));
+        arr = "60-(2+1*3*2)";
+        System.out.println(count(arr));
+        arr = "5+0/(10-5)+2";
+        System.out.println(count(arr));
     }
 
     public static String count(String task) {
         String[] parsedTask = parseToRPN(task);
-        double res = stackMachine(parsedTask);
-        return String.valueOf(res);
+        String res = stackMachine(parsedTask);
+        return (res.substring(res.length() - 2)).equals(".0") ? res.substring(0, res.length() - 2) : res;
     }
 
-    private static String[] parseToRPN(String task) { //TODO implement me
+    private static String[] parseToRPN(String task) {
+        StringBuilder string = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
 
-        return null;
+        for (int i = 0; i < task.length(); i++) {
+            char c = task.charAt(i);
+            if (Character.isDigit(c)) {
+                string.append(c);
+            } else if (c == '(') {
+                stack.push(c);
+            } else if (c == ')') {
+                c = stack.pop();
+                while (c != '(') {
+                    string.append(' ');
+                    string.append(c);
+                    c = stack.pop();
+                }
+            } else {
+                while (!stack.empty() && (getPriority(c) <= getPriority(stack.peek()))) {
+                    string.append(' ');
+                    string.append(stack.pop());
+                }
+                string.append(' ');
+                stack.push(c);
+            }
+        }
+        while (!stack.empty()) {
+            string.append(' ');
+            string.append(stack.pop());
+        }
+        return string.toString().replace("  ", " ").split(" ");
     }
 
-    private static double stackMachine(String[] arr) {
+    private static int getPriority(char c) {
+        switch (c) {
+            case '(':
+            case ')':
+                return 0;
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+            default:
+                return 3;
+        }
+    }
+
+
+    private static String stackMachine(String[] arr) {
         Stack<Double> stack = new Stack<>();
         for (int i = 0; i < arr.length; i++) {
             try {
@@ -42,11 +93,12 @@ public class ExampleSolver {
                         stack.push(a * b);
                         break;
                     case "/":
+                        if (b == 0) return "Division on zero";
                         stack.push(a / b);
                         break;
                 }
             }
         }
-        return stack.pop();
+        return String.valueOf(Math.ceil(stack.pop() * 100) / 100);
     }
 }
