@@ -23,5 +23,6 @@ public class Main {
 
         Logic logic = new Logic();
         logic.run(input, output);
+        Judges judges = new Judges(logic);
     }
 }

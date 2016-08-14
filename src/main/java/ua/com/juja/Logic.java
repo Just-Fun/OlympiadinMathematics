@@ -1,7 +1,5 @@
 package ua.com.juja;
 
-import ua.com.juja.solvers.ExampleSolver;
-import ua.com.juja.solvers.ExpressionParser;
 import ua.com.juja.solvers.SimpleSolver;
 
 import java.io.*;
@@ -32,7 +30,7 @@ public class Logic {
         clearFile(output);
         createNamesAndTasksFromFile(input, names, tasks);
         createMapsSolvedTaskAndSpentTime();
-        createThreadsAndStartEachOne(names);
+        createAndStartThreads(names);
     }
 
     private void createMapsSolvedTaskAndSpentTime() {
@@ -76,19 +74,12 @@ public class Logic {
         }
     }
 
-    public void createThreadsAndStartEachOne(List<String> names) {
+    public void createAndStartThreads(List<String> names) {
         for (String name : names) {
             new Thread(() -> {
                 int index = getNextTask();
                 while (index < taskLength) {
-                    String task = tasks.get(index);
-                    System.out.println(name + " взял задание: " + task);
-                    long start = System.currentTimeMillis();
-                    String stringInFile = getAndResolveTask(name, task);
-                    long finish = System.currentTimeMillis();
-                    incrementSpentTime(name, start, finish);
-                    writeResultInFile(output.getAbsolutePath(), stringInFile, name);
-                    incrementSolverTasks(name);
+                    doJob(name, index);
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -100,13 +91,18 @@ public class Logic {
         }
     }
 
-    private void incrementSpentTime(String name, long start, long finish) {
-        long spentTimeOnTask = finish - start;
-        Long newTime = new Long(spentTime.get(name) + spentTimeOnTask);
-        spentTime.put(name, newTime);
+    private void doJob(String name, int index) {
+        String nextTask = tasks.get(index);
+        System.out.println(name + " взял задание: " + nextTask);
+        long start = System.currentTimeMillis();
+        String stringInFile = resolveTask(name, nextTask);
+        long finish = System.currentTimeMillis();
+        incrementSpentTime(name, start, finish);
+        writeResultInFile(output.getAbsolutePath(), stringInFile, name);
+        incrementSolverTasks(name);
     }
 
-    private String getAndResolveTask(String name, String task) {
+    private String resolveTask(String name, String task) {
 // Разные реализации:
         String countResult = SimpleSolver.calculate(task);
 //        String countResult = ExpressionParser.run(task);
@@ -123,6 +119,12 @@ public class Logic {
         } catch (IOException e1) {
             throw new RuntimeException("Не вышло записать в файл по причине: ", e1.getCause());
         }
+    }
+
+    private void incrementSpentTime(String name, long start, long finish) {
+        long spentTimeOnTask = finish - start;
+        Long newTime = new Long(spentTime.get(name) + spentTimeOnTask);
+        spentTime.put(name, newTime);
     }
 
     private void incrementSolverTasks(String name) {
