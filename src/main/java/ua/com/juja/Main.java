@@ -1,6 +1,7 @@
 package ua.com.juja;
 
 import java.io.*;
+import java.util.Arrays;
 
 /**
  * Created by Serzh on 8/12/16.
@@ -22,7 +23,7 @@ public class Main {
         File output = new File("src/main/resources/output.txt");
 
         Object monitor = new Object();
-        Logic logic = new Logic(monitor);
+        Logic logic = new Logic();
         logic.run(input, output);
     }
 }

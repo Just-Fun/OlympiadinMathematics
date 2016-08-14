@@ -21,11 +21,6 @@ public class Logic {
 
     int taskLength;
     static volatile int nextTask = 0;
-    private Object monitor;
-
-    public Logic(Object monitor) {
-        this.monitor = monitor;
-    }
 
     public synchronized int getNextTask() {
         return nextTask++;
