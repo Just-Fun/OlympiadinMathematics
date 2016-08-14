@@ -55,7 +55,7 @@ public class LogicTest {
     public void writeResultInFile() throws Exception {
         File file = new File("src/test/resources/testOutput2.txt");
         logic.clearFile(file);
-        logic.writeResultInFile(file.getAbsolutePath(), "Test writing");
+        logic.writeResultInFile(file.getAbsolutePath(), "Test writing", "name");
         String check = utils.read(new File("src/test/resources/testOutput2.txt"));
         assertEquals(("Test writing").replaceAll("\r\n", "\n"), check);
     }

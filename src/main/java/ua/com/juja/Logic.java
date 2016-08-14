@@ -1,5 +1,7 @@
 package ua.com.juja;
 
+import ua.com.juja.solvers.ExampleSolver;
+import ua.com.juja.solvers.ExpressionParser;
 import ua.com.juja.solvers.SimpleSolver;
 
 import java.io.*;
@@ -81,8 +83,12 @@ public class Logic {
                 while (index < taskLength) {
                     String task = tasks.get(index);
                     System.out.println(name + " взял задание: " + task);
+                    long start = System.currentTimeMillis();
                     String stringInFile = getAndResolveTask(name, task);
-                    writeResultInFile(output.getAbsolutePath(), stringInFile);
+                    long finish = System.currentTimeMillis();
+                    incrementSpentTime(name, start, finish);
+                    writeResultInFile(output.getAbsolutePath(), stringInFile, name);
+                    incrementSolverTasks(name);
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -94,8 +100,14 @@ public class Logic {
         }
     }
 
-// Разные реализации :)
+    private void incrementSpentTime(String name, long start, long finish) {
+        long spentTimeOnTask = finish - start;
+        Long newTime = new Long(spentTime.get(name) + spentTimeOnTask);
+        spentTime.put(name, newTime);
+    }
+
     private String getAndResolveTask(String name, String task) {
+// Разные реализации:
         String countResult = SimpleSolver.calculate(task);
 //        String countResult = ExpressionParser.run(task);
 //        String countResult = ExampleSolver.count(task);
@@ -103,13 +115,18 @@ public class Logic {
         return name + ";" + task + ";" + countResult + "\n";
     }
 
-    public static void writeResultInFile(String file, String str) {
+    public void writeResultInFile(String file, String str, String name) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
             writer.write(str);
             writer.flush();
             System.out.print("Записано: " + str);
         } catch (IOException e1) {
-            throw new RuntimeException("Не вышло записать в файл", e1.getCause());
+            throw new RuntimeException("Не вышло записать в файл по причине: ", e1.getCause());
         }
+    }
+
+    private void incrementSolverTasks(String name) {
+        Integer integer = new Integer(solvedTasks.get(name) + 1);
+        solvedTasks.put(name, integer);
     }
 }
