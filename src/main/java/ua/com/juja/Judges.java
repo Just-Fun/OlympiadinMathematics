@@ -13,15 +13,16 @@ public class Judges {
         this.logic = logic;
     }
 
-    public void getWinners(){
+    public String getWinners(){
         Map<String, Integer> sortedMap = MapUtil.sortByValue(logic.solvedTasks);
+        String result = "";
         for (int i = 0; i < 3; i++) {
             String name = sortedMap.keySet().toArray()[i].toString();
             String numberOfTasks = sortedMap.values().toArray()[i].toString();
             Long spentTime = logic.spentTime.get(name);
-            String result = name + ";" + numberOfTasks + ";" + String.valueOf(spentTime);
-            System.out.println("Тройка победителей: " + result);
+            result += name + ";" + numberOfTasks + ";" + String.valueOf(spentTime) + "\n";
         }
-
+        System.out.println("Тройка победителей: \n" + result);
+        return result;
     }
 }

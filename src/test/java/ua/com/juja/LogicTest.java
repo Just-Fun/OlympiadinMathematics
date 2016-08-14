@@ -26,8 +26,7 @@ public class LogicTest {
 
     @Before
     public void setup() {
-        Object monitor = new Object();
-        logic = new Logic(monitor);
+        logic = new Logic();
         utils = new Utils();
     }
 
@@ -56,7 +55,7 @@ public class LogicTest {
     public void writeResultInFile() throws Exception {
         File file = new File("src/test/resources/testOutput2.txt");
         logic.clearFile(file);
-        logic.writeResultInFile(file.getAbsolutePath(), "Test writing", "name");
+        logic.writeResultInFile(file.getAbsolutePath(), "Test writing");
         String check = utils.read(new File("src/test/resources/testOutput2.txt"));
         assertEquals(("Test writing").replaceAll("\r\n", "\n"), check);
     }

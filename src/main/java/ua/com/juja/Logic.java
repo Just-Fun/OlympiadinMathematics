@@ -41,7 +41,8 @@ public class Logic {
             if (tg.activeCount() == 0) {
                 Judges judges = new Judges(this);
                 System.out.println("судьи считают");
-                judges.getWinners();
+                String result = judges.getWinners();
+                writeResultInFile(output.getAbsolutePath(), result);
                 end = true;
             }
         }
@@ -113,7 +114,7 @@ public class Logic {
         String stringInFile = resolveTask(name, nextTask);
         long finish = System.currentTimeMillis();
         incrementSpentTime(name, start, finish);
-        writeResultInFile(output.getAbsolutePath(), stringInFile, name);
+        writeResultInFile(output.getAbsolutePath(), stringInFile);
         incrementSolverTasks(name);
     }
 
@@ -126,11 +127,11 @@ public class Logic {
         return name + ";" + task + ";" + countResult + "\n";
     }
 
-    public void writeResultInFile(String file, String str, String name) {
+    public void writeResultInFile(String file, String str) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(str);
             writer.flush();
-            System.out.print("Записано: " + str);
+            System.out.print("Записано: \n" + str);
         } catch (IOException e1) {
             throw new RuntimeException("Не вышло записать в файл по причине: ", e1.getCause());
         }

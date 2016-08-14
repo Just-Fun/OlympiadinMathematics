@@ -22,7 +22,6 @@ public class Main {
         File input = new File("src/main/resources/input.txt");
         File output = new File("src/main/resources/output.txt");
 
-        Object monitor = new Object();
         Logic logic = new Logic();
         logic.run(input, output);
     }
