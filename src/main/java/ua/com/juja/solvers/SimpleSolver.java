@@ -8,9 +8,14 @@ import javax.script.ScriptException;
 /**
  * Created by Serzh on 8/12/16.
  */
-public class SimpleSolver {
+public class SimpleSolver implements Example{
 
-    public static String calculate(String task) {
+    @Override
+    public String count(String task) {
+        return run(task);
+    }
+
+    public static String run(String task) {
         ScriptEngineManager mgr = new ScriptEngineManager();
         ScriptEngine engine = mgr.getEngineByName("JavaScript");
         Object eval = null;

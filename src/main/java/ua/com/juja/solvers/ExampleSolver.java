@@ -2,35 +2,39 @@ package ua.com.juja.solvers;
 
 import java.util.Stack;
 
-public class ExampleSolver {
+public class ExampleSolver implements Example {
     public static void main(String[] args) {
+        Example solver = new ExampleSolver();
         String arr = "35+40*2/(10-5)";
-        System.out.println(count(arr));
+        System.out.println(solver.count(arr));
         arr = "35+40*2/(10-3)";
-        System.out.println(count(arr));
+        System.out.println(solver.count(arr));
         arr = "35+40*2/(10-5*7)";
-        System.out.println(count(arr));
+        System.out.println(solver.count(arr));
         arr = "6-(2+(1*3)*2)";
-        System.out.println(count(arr));
+        System.out.println(solver.count(arr));
         arr = "60-(2+1*3*2)";
-        System.out.println(count(arr));
-        arr = "5+0/(10-5)+2";
-        System.out.println(count(arr));
+        System.out.println(solver.count(arr));
+        arr = "-2+2";
+        System.out.println(solver.count(arr));
     }
 
-    public static String count(String task) {
+    @Override
+    public String count(String task) {
         String[] parsedTask = parseToRPN(task);
         String res = stackMachine(parsedTask);
         return (res.substring(res.length() - 2)).equals(".0") ? res.substring(0, res.length() - 2) : res;
     }
 
-    private static String[] parseToRPN(String task) {
+    private String[] parseToRPN(String task) {
         StringBuilder string = new StringBuilder();
         Stack<Character> stack = new Stack<>();
 
         for (int i = 0; i < task.length(); i++) {
             char c = task.charAt(i);
-            if (Character.isDigit(c)) {
+            if (Character.isDigit(c) || c == '.' || c == ',') {
+                string.append(c);
+            } else if (c == '-' && (string.length() == 0 || string.charAt(string.length()-1) == ' ')) {
                 string.append(c);
             } else if (c == '(') {
                 stack.push(c);
@@ -57,7 +61,7 @@ public class ExampleSolver {
         return string.toString().replace("  ", " ").split(" ");
     }
 
-    private static int getPriority(char c) {
+    private int getPriority(char c) {
         switch (c) {
             case '(':
             case ')':
@@ -74,7 +78,7 @@ public class ExampleSolver {
     }
 
 
-    private static String stackMachine(String[] arr) {
+    private String stackMachine(String[] arr) {
         Stack<Double> stack = new Stack<>();
         for (int i = 0; i < arr.length; i++) {
             try {

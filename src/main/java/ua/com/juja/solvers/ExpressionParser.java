@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import java.util.*;
 
-public class ExpressionParser {
+public class ExpressionParser implements Example{
     // Associativity constants for operators
     private static final int LEFT_ASSOC = 0;
     private static final int RIGHT_ASSOC = 1;
@@ -130,5 +130,10 @@ public class ExpressionParser {
         }
 
         return Double.valueOf(stack.pop());
+    }
+
+    @Override
+    public String count(String task) {
+        return run(task);
     }
 }
