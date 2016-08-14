@@ -7,7 +7,6 @@ import java.util.Map;
  * Created by Serzh on 8/14/16.
  */
 public class Judges {
-//    Map<String, Map<Integer, Long>> map = new HashMap<>();
     Logic logic;
 
     public Judges(Logic logic) {
@@ -16,6 +15,13 @@ public class Judges {
 
     public void getWinners(){
         Map<String, Integer> sortedMap = MapUtil.sortByValue(logic.solvedTasks);
+        for (int i = 0; i < 3; i++) {
+            String name = sortedMap.keySet().toArray()[i].toString();
+            String numberOfTasks = sortedMap.values().toArray()[i].toString();
+            Long spentTime = logic.spentTime.get(name);
+            String result = name + ";" + numberOfTasks + ";" + String.valueOf(spentTime);
+            System.out.println("Тройка победителей: " + result);
+        }
 
     }
 }

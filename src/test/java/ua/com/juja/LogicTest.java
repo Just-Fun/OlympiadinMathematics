@@ -26,7 +26,8 @@ public class LogicTest {
 
     @Before
     public void setup() {
-        logic = new Logic();
+        Object monitor = new Object();
+        logic = new Logic(monitor);
         utils = new Utils();
     }
 

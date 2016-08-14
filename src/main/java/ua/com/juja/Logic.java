@@ -17,9 +17,15 @@ public class Logic {
     List<String> tasks = new ArrayList<>();
     Map<String, Long> spentTime = new HashMap<>();
     Map<String, Integer> solvedTasks = new HashMap<>();
+    ThreadGroup tg = new ThreadGroup("threadGroup");
 
     int taskLength;
     static volatile int nextTask = 0;
+    private Object monitor;
+
+    public Logic(Object monitor) {
+        this.monitor = monitor;
+    }
 
     public synchronized int getNextTask() {
         return nextTask++;
@@ -31,6 +37,19 @@ public class Logic {
         createNamesAndTasksFromFile(input, names, tasks);
         createMapsSolvedTaskAndSpentTime();
         createAndStartThreads(names);
+        winners();
+    }
+
+    private void winners() {
+        boolean end = false;
+        while (!end) {
+            if (tg.activeCount() == 0) {
+                Judges judges = new Judges(this);
+                System.out.println("судьи считают");
+                judges.getWinners();
+                end = true;
+            }
+        }
     }
 
     private void createMapsSolvedTaskAndSpentTime() {
@@ -76,7 +95,7 @@ public class Logic {
 
     public void createAndStartThreads(List<String> names) {
         for (String name : names) {
-            new Thread(() -> {
+            Thread thread = new Thread(tg, () -> {
                 int index = getNextTask();
                 while (index < taskLength) {
                     doJob(name, index);
@@ -87,7 +106,8 @@ public class Logic {
                     }
                     index = getNextTask();
                 }
-            }).start();
+            })/*.start()*/;
+            thread.start();
         }
     }
 
@@ -112,7 +132,7 @@ public class Logic {
     }
 
     public void writeResultInFile(String file, String str, String name) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(str);
             writer.flush();
             System.out.print("Записано: " + str);

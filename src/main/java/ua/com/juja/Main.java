@@ -21,8 +21,8 @@ public class Main {
         File input = new File("src/main/resources/input.txt");
         File output = new File("src/main/resources/output.txt");
 
-        Logic logic = new Logic();
+        Object monitor = new Object();
+        Logic logic = new Logic(monitor);
         logic.run(input, output);
-        Judges judges = new Judges(logic);
     }
 }

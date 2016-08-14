@@ -108,7 +108,7 @@ public class ExpressionParser {
     }
 
     public static double RPNtoDouble(String[] tokens) {
-        Stack<String> stack = new Stack<String>();
+        Stack<String> stack = new Stack<>();
 
         // For each token
         for (String token : tokens) {
