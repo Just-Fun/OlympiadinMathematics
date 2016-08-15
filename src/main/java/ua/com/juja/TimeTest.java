@@ -1,4 +1,4 @@
-package ua.com.juja.version_1;
+package ua.com.juja;
 
 import ua.com.juja.solvers.Solver;
 import ua.com.juja.solvers.ExampleSolver;

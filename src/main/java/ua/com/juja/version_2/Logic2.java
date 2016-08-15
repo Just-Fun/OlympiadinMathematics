@@ -66,9 +66,9 @@ public class Logic2 {
             }
             taskLength = tasks.size();
         } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException");
+            System.out.println("FileNotFoundException: " + ex.getCause());
         } catch (IOException e) {
-            System.out.println("IOException");
+            System.out.println("IOException: " + e.getCause());
         }
     }
 
@@ -82,13 +82,6 @@ public class Logic2 {
                 }
             }).start();
         }
-    }
-
-    private void winners() {
-        Judges2 judges = new Judges2(students);
-        String result = judges.getWinners();
-        writeResultInFile(outputPath, "Winners:\n");
-        writeResultInFile(outputPath, result);
     }
 
     private void takeTask(Student student, int taskIndex) {
@@ -107,5 +100,12 @@ public class Logic2 {
         student.incrementSpentTimeAndResolvedTasks(spentTime);
         String stringInFile = name + ";" + task + ";" + countResult + "\n";
         writeResultInFile(outputPath, stringInFile);
+    }
+
+    private void winners() {
+        Judges2 judges = new Judges2(students);
+        String result = judges.getWinners();
+        writeResultInFile(outputPath, "Winners:\n");
+        writeResultInFile(outputPath, result);
     }
 }
