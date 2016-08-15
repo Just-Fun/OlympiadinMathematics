@@ -1,6 +1,6 @@
 package ua.com.juja.version_2;
 
-import ua.com.juja.solvers.Example;
+import ua.com.juja.solvers.Solver;
 import ua.com.juja.solvers.ExampleSolver;
 
 import java.io.*;
@@ -16,23 +16,19 @@ public class Logic2 {
     private File output;
     private File input;
     private String outputPath;
+    private Solver solver;
     private static volatile int nextTask = 0;
+    private int taskLength;
 
     List<Student> students = new ArrayList<>();
     List<String> tasks = new ArrayList<>();
-
     ThreadGroup tg = new ThreadGroup("threadGroup");
 
-    private int taskLength;
-
-    public Logic2(File input, File output) {
+    public Logic2(File namesAndTasks, File output, Solver solver) {
+        this.input = namesAndTasks;
         this.output = output;
-        this.input = input;
         outputPath = output.getAbsolutePath();
-    }
-
-    private synchronized int getNextTask() {
-        return nextTask++;
+        this.solver = solver;
     }
 
     public void run() {
@@ -46,6 +42,10 @@ public class Logic2 {
                 end = true;
             }
         }
+    }
+
+    private synchronized int getNextTask() {
+        return nextTask++;
     }
 
     private void createNamesAndTasksFromFile() { // TODO перенести в утилз?
@@ -85,16 +85,10 @@ public class Logic2 {
     }
 
     private void winners() {
-        /*boolean end = false;
-        while (!end) {
-            if (tg.activeCount() == 0) {*/
         Judges2 judges = new Judges2(students);
         String result = judges.getWinners();
         writeResultInFile(outputPath, "Winners:\n");
         writeResultInFile(outputPath, result);
-       /*         end = true;
-            }
-        }*/
     }
 
     private void takeTask(Student student, int taskIndex) {
@@ -103,12 +97,8 @@ public class Logic2 {
     }
 
     private void resolveTask(Student student, int taskIndex) {
-        Example solver = new ExampleSolver();
         String task = tasks.get(taskIndex);
         long start = System.nanoTime();
-        // Разные реализации:
-//        String countResult = ExpressionParser.run(task);
-//        String countResult = ExampleSolver.count(task);
         String countResult = solver.count(task);
         long spentTime = System.nanoTime() - start;
 

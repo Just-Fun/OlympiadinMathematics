@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import java.util.*;
 
-public class ExpressionParser implements Example{
+public class ExpressionParser implements Solver {
     // Associativity constants for operators
     private static final int LEFT_ASSOC = 0;
     private static final int RIGHT_ASSOC = 1;

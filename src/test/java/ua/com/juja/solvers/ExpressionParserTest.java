@@ -11,7 +11,7 @@ public class ExpressionParserTest {
 
     @Test
     public void test() {
-        Example solver = new ExpressionParser();
+        Solver solver = new ExpressionParser();
         assertEquals(String.valueOf(2.0), solver.count("1+1"));
         assertEquals(String.valueOf(6.8), solver.count("2*3+4/5"));
         assertEquals(String.valueOf(0.45), solver.count("4/9"));

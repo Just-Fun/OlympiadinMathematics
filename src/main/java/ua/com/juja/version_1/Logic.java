@@ -1,6 +1,6 @@
 package ua.com.juja.version_1;
 
-import ua.com.juja.solvers.Example;
+import ua.com.juja.solvers.Solver;
 import ua.com.juja.solvers.ExampleSolver;
 
 import java.io.*;
@@ -121,9 +121,9 @@ public class Logic {
 
     private String resolveTask(String name, String task) {
 // Разные реализации:
-        Example solver = new ExampleSolver();
-//        Example solver = new ExpressionParser();
-//        Example solver = new SimpleSolver();
+        Solver solver = new ExampleSolver();
+//        Solver solver = new ExpressionParser();
+//        Solver solver = new SimpleSolver();
         String countResult = solver.count(task);
         System.out.println(name + " решил задание, ответ: " + countResult);
         return name + ";" + task + ";" + countResult + "\n";

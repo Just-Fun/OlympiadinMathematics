@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class ExampleSolverTest {
     @Test
     public void count() throws Exception {
-        Example solver = new ExampleSolver();
+        Solver solver = new ExampleSolver();
         assertEquals(String.valueOf(2), solver.count("1+1"));
         assertEquals(String.valueOf(6.8), solver.count("2*3+4/5"));
         assertEquals(String.valueOf(0.45), solver.count("4/9"));

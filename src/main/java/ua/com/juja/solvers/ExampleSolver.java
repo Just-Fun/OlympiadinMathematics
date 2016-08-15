@@ -2,9 +2,9 @@ package ua.com.juja.solvers;
 
 import java.util.Stack;
 
-public class ExampleSolver implements Example {
+public class ExampleSolver implements Solver {
     public static void main(String[] args) {
-        Example solver = new ExampleSolver();
+        Solver solver = new ExampleSolver();
         String arr = "35+40*2/(10-5)";
         System.out.println(solver.count(arr));
         arr = "35+40*2/(10-3)";

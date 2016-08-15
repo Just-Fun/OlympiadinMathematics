@@ -8,7 +8,7 @@ import javax.script.ScriptException;
 /**
  * Created by Serzh on 8/12/16.
  */
-public class SimpleSolver implements Example{
+public class SimpleSolver implements Solver {
 
     @Override
     public String count(String task) {

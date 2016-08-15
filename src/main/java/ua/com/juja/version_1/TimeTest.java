@@ -1,13 +1,13 @@
 package ua.com.juja.version_1;
 
-import ua.com.juja.solvers.Example;
+import ua.com.juja.solvers.Solver;
 import ua.com.juja.solvers.ExampleSolver;
 import ua.com.juja.solvers.ExpressionParser;
 import ua.com.juja.solvers.SimpleSolver;
 
 public class TimeTest {
     public static void main(String[] args) {
-        Example example = new ExampleSolver();
+        Solver example = new ExampleSolver();
         System.out.println("ExampleSolver : " + getTime(example));
         example = new ExpressionParser();
         System.out.println("ExpressionParser : " + getTime(example));
@@ -29,7 +29,7 @@ public class TimeTest {
         System.out.println("SimpleSolver : " + getTime(example));
     }
 
-    private static double getTime(Example example) {
+    private static double getTime(Solver example) {
         long t1 = System.nanoTime();
         for (int i = 0; i < 10; i++) {
             example.count("35+40*2/(10-5*7)");

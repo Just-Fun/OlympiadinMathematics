@@ -1,5 +1,7 @@
 package ua.com.juja.version_2;
 
+import ua.com.juja.solvers.*;
+
 import java.io.File;
 
 /**
@@ -18,10 +20,13 @@ import java.io.File;
 */
 public class Main2 {
     public static void main(String[] args) {
-        File input = new File("src/main/resources/input.txt");
+        File namesAndTasks = new File("src/main/resources/input.txt");
         File output = new File("src/main/resources/output.txt");
+        Solver solver = new ExampleSolver();
+//        Solver solver = new ExpressionParser();
+//        Solver solver = new SimpleSolver();
 
-        Logic2 logic = new Logic2(input, output);
+        Logic2 logic = new Logic2(namesAndTasks, output, solver);
         logic.run();
     }
 }
