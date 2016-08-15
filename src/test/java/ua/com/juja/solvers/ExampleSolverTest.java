@@ -17,6 +17,7 @@ public class ExampleSolverTest {
         assertEquals(String.valueOf(720), solver.count("1*2*3*4*5*6"));
         assertEquals(String.valueOf(-0.33), solver.count("(7-9)/6"));
         assertEquals(String.valueOf(-2), solver.count("6-(2+(1*3)*2)"));
+        assertEquals(String.valueOf(-2.5), solver.count("-5/2"));
     }
 
 }

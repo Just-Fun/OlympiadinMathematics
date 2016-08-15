@@ -1,7 +1,4 @@
-package ua.com.juja;
-
-import java.util.*;
-import java.util.stream.Collectors;
+package ua.com.juja.forTests;
 
 /**
  * Created by Serzh on 8/14/16.

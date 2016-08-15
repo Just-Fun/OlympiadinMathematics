@@ -1,13 +1,13 @@
-package ua.com.juja.version_1;
+package ua.com.juja.UtilsForTests;
 
 import java.io.*;
 
 /**
  * Created by Serzh on 8/12/16.
  */
-public class Utils {
+public class UtilsForTests {
 
-    public String read(File file) {
+    public static String read(File file) {
         String result = "";
         BufferedReader reader = null;
         try {

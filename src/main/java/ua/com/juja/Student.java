@@ -1,4 +1,4 @@
-package ua.com.juja.version_2;
+package ua.com.juja;
 
 /**
  * Created by Serzh on 8/14/16.

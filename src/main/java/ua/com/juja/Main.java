@@ -1,4 +1,4 @@
-package ua.com.juja.version_2;
+package ua.com.juja;
 
 import ua.com.juja.solvers.*;
 
@@ -18,15 +18,15 @@ import java.io.File;
  с количеством решенных задача и временем выполнения задач. Формат вывода:
  Имя ученика;количество решенных задач;время выполнения задач
 */
-public class Main2 {
+public class Main {
     public static void main(String[] args) {
         File namesAndTasks = new File("src/main/resources/input.txt");
         File output = new File("src/main/resources/output.txt");
         Solver solver = new ExampleSolver();
-//        Solver solver = new ExpressionParser();
 //        Solver solver = new SimpleSolver();
+//        Solver solver = new ExpressionParser(); // TODO допилить для отрицательных чисел
 
-        Logic2 logic = new Logic2(namesAndTasks, output, solver);
+        Logic logic = new Logic(namesAndTasks, output, solver);
         logic.run();
     }
 }

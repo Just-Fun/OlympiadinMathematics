@@ -1,18 +1,15 @@
-package ua.com.juja.version_2;
+package ua.com.juja;
 
 import ua.com.juja.solvers.Solver;
-import ua.com.juja.solvers.ExampleSolver;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ua.com.juja.version_2.Utils.*;
-
 /**
  * Created by Serzh on 8/12/16.
  */
-public class Logic2 {
+public class Logic {
     private File output;
     private File input;
     private String outputPath;
@@ -24,7 +21,7 @@ public class Logic2 {
     List<String> tasks = new ArrayList<>();
     ThreadGroup tg = new ThreadGroup("threadGroup");
 
-    public Logic2(File namesAndTasks, File output, Solver solver) {
+    public Logic(File namesAndTasks, File output, Solver solver) {
         this.input = namesAndTasks;
         this.output = output;
         outputPath = output.getAbsolutePath();
@@ -32,7 +29,7 @@ public class Logic2 {
     }
 
     public void run() {
-        clearFile(output);
+        Utils.clearFile(output);
         createNamesAndTasksFromFile();
         createAndStartThreads(students);
         boolean end = false;
@@ -99,13 +96,13 @@ public class Logic2 {
         System.out.println(name + " spent on task №" + (taskIndex + 1) + ": " + spentTime + " nanoseconds , result: " + task + " = " + countResult + ",  ");
         student.incrementSpentTimeAndResolvedTasks(spentTime);
         String stringInFile = name + ";" + task + ";" + countResult + "\n";
-        writeResultInFile(outputPath, stringInFile);
+        Utils.writeResultInFile(outputPath, stringInFile);
     }
 
     private void winners() {
-        Judges2 judges = new Judges2(students);
+        Judges judges = new Judges(students);
         String result = judges.getWinners();
-        writeResultInFile(outputPath, "Winners:\n");
-        writeResultInFile(outputPath, result);
+        Utils.writeResultInFile(outputPath, "Winners:\n");
+        Utils.writeResultInFile(outputPath, result);
     }
 }

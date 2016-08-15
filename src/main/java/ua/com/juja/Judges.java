@@ -1,4 +1,4 @@
-package ua.com.juja.version_2;
+package ua.com.juja;
 
 import java.util.stream.Collectors;
 import java.util.*;
@@ -6,10 +6,10 @@ import java.util.*;
 /**
  * Created by Serzh on 8/14/16.
  */
-public class Judges2 {
+public class Judges {
     private List<Student> students;
 
-    public Judges2(List<Student> students) {
+    public Judges(List<Student> students) {
         this.students = students;
     }
 

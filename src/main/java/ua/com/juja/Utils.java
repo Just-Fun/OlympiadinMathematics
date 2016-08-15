@@ -1,4 +1,4 @@
-package ua.com.juja.version_2;
+package ua.com.juja;
 
 import java.io.BufferedWriter;
 import java.io.File;
