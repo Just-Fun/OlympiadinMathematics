@@ -7,11 +7,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ua.com.juja.version_2.Utils.*;
+
 /**
  * Created by Serzh on 8/12/16.
  */
 public class Logic2 {
     private File output;
+    private File input;
+    private String outputPath;
     private static volatile int nextTask = 0;
 
     List<Student> students = new ArrayList<>();
@@ -21,19 +25,30 @@ public class Logic2 {
 
     private int taskLength;
 
+    public Logic2(File input, File output) {
+        this.output = output;
+        this.input = input;
+        outputPath = output.getAbsolutePath();
+    }
+
     private synchronized int getNextTask() {
         return nextTask++;
     }
 
-    public void run(File input, File output) {
-        this.output = output;
-        Utils.clearFile(output);
-        createNamesAndTasksFromFile(input);
+    public void run() {
+        clearFile(output);
+        createNamesAndTasksFromFile();
         createAndStartThreads(students);
-        winners();
+        boolean end = false;
+        while (!end) {
+            if (tg.activeCount() == 0) {
+                winners();
+                end = true;
+            }
+        }
     }
 
-    private void createNamesAndTasksFromFile(File input) {
+    private void createNamesAndTasksFromFile() { // TODO перенести в утилз?
         try (BufferedReader br = new BufferedReader(new FileReader(input))) {
             String line;
             boolean task = false;
@@ -70,17 +85,16 @@ public class Logic2 {
     }
 
     private void winners() {
-        boolean end = false;
+        /*boolean end = false;
         while (!end) {
-            if (tg.activeCount() == 0) {
-                Judges2 judges = new Judges2(students);
-//                System.out.println("судьи считают");
-                String result = judges.getWinners();
-                Utils.writeResultInFile(output.getAbsolutePath(), "Winners:");
-                Utils.writeResultInFile(output.getAbsolutePath(), result);
-                end = true;
+            if (tg.activeCount() == 0) {*/
+        Judges2 judges = new Judges2(students);
+        String result = judges.getWinners();
+        writeResultInFile(outputPath, "Winners:\n");
+        writeResultInFile(outputPath, result);
+       /*         end = true;
             }
-        }
+        }*/
     }
 
     private void takeTask(Student student, int taskIndex) {
@@ -99,9 +113,9 @@ public class Logic2 {
         long spentTime = System.nanoTime() - start;
 
         String name = student.getName();
-        System.out.println(name + " spent on task №" + (taskIndex + 1) + ": " + spentTime + " nanoseconds , result: " + task + " = "+ countResult + ",  ");
+        System.out.println(name + " spent on task №" + (taskIndex + 1) + ": " + spentTime + " nanoseconds , result: " + task + " = " + countResult + ",  ");
         student.incrementSpentTimeAndResolvedTasks(spentTime);
         String stringInFile = name + ";" + task + ";" + countResult + "\n";
-        Utils.writeResultInFile(output.getAbsolutePath(), stringInFile);
+        writeResultInFile(outputPath, stringInFile);
     }
 }

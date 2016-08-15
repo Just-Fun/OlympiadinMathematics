@@ -1,6 +1,5 @@
 package ua.com.juja.version_2;
 
-import java.io.File;
 import java.util.stream.Collectors;
 import java.util.*;
 
@@ -8,7 +7,7 @@ import java.util.*;
  * Created by Serzh on 8/14/16.
  */
 public class Judges2 {
-    List<Student> students;
+    private List<Student> students;
 
     public Judges2(List<Student> students) {
         this.students = students;
@@ -24,6 +23,11 @@ public class Judges2 {
                 .limit(3)
                 .collect(Collectors.toList());
 
+        System.out.println("\nТройка победителей:");
+        winners.stream()
+                .map(Student::getName)
+                .forEach(System.out::println);
+
         String result = "";
         for (Student winner : winners) {
             String name = winner.getName();
@@ -31,10 +35,6 @@ public class Judges2 {
             Long spentTime = winner.getSpentTimeOnTasks();
             result += name + ";" + String.valueOf(numberOfTasks) + ";" + String.valueOf(spentTime) + "\n";
         }
-        System.out.println("\nТройка победителей:");
-        winners.stream()
-                .map(student -> student.getName())
-                .forEach(System.out::println);
         return result;
     }
 }

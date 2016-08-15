@@ -1,7 +1,5 @@
 package ua.com.juja.version_2;
 
-import ua.com.juja.version_1.Logic;
-
 import java.io.File;
 
 /**
@@ -23,7 +21,7 @@ public class Main2 {
         File input = new File("src/main/resources/input.txt");
         File output = new File("src/main/resources/output.txt");
 
-        Logic2 logic = new Logic2();
-        logic.run(input, output);
+        Logic2 logic = new Logic2(input, output);
+        logic.run();
     }
 }
