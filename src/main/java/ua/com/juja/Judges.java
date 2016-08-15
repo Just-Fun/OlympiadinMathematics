@@ -33,7 +33,7 @@ public class Judges {
             String name = winner.getName();
             int numberOfTasks = winner.getNumberResolvedTasks();
             Long spentTime = winner.getSpentTimeOnTasks();
-            result += name + ";" + String.valueOf(numberOfTasks) + ";" + String.valueOf(spentTime) + "\n";
+            result += String.format("%s;%s;%s\n", name, String.valueOf(numberOfTasks), String.valueOf(spentTime));
         }
         return result;
     }
