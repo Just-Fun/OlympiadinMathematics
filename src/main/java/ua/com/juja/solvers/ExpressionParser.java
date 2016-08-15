@@ -24,8 +24,8 @@ public class ExpressionParser implements Example{
         OPERATORS.put("/", new int[]{5, LEFT_ASSOC});
     }
 
-
-    public static String run(String task) {
+    @Override
+    public String count(String task) {
         String[] input = task.split("");
         String[] output = infixToRPN(input);
         Double result = RPNtoDouble(output);
@@ -130,10 +130,5 @@ public class ExpressionParser implements Example{
         }
 
         return Double.valueOf(stack.pop());
-    }
-
-    @Override
-    public String count(String task) {
-        return run(task);
     }
 }

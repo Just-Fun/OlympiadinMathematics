@@ -5,35 +5,33 @@ import ua.com.juja.solvers.ExampleSolver;
 import ua.com.juja.solvers.ExpressionParser;
 import ua.com.juja.solvers.SimpleSolver;
 
-import java.util.Random;
-
 public class TimeTest {
     public static void main(String[] args) {
         Example example = new ExampleSolver();
         System.out.println("ExampleSolver : " + getTime(example));
         example = new ExpressionParser();
         System.out.println("ExpressionParser : " + getTime(example));
-//        example = new SimpleSolver();
-//        System.out.println("SimpleSolver : " + getTime(example));
+        example = new SimpleSolver();
+        System.out.println("SimpleSolver : " + getTime(example));
 
         example = new ExampleSolver();
         System.out.println("ExampleSolver : " + getTime(example));
         example = new ExpressionParser();
         System.out.println("ExpressionParser : " + getTime(example));
-//        example = new SimpleSolver();
-//        System.out.println("SimpleSolver : " + getTime(example));
+        example = new SimpleSolver();
+        System.out.println("SimpleSolver : " + getTime(example));
 
         example = new ExampleSolver();
         System.out.println("ExampleSolver : " + getTime(example));
         example = new ExpressionParser();
         System.out.println("ExpressionParser : " + getTime(example));
-//        example = new SimpleSolver();
-//        System.out.println("SimpleSolver : " + getTime(example));
+        example = new SimpleSolver();
+        System.out.println("SimpleSolver : " + getTime(example));
     }
 
     private static double getTime(Example example) {
         long t1 = System.nanoTime();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 10; i++) {
             example.count("35+40*2/(10-5*7)");
             example.count("1+1");
             example.count("2*3+4/5");

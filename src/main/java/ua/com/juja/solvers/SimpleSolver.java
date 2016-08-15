@@ -12,10 +12,6 @@ public class SimpleSolver implements Example{
 
     @Override
     public String count(String task) {
-        return run(task);
-    }
-
-    public static String run(String task) {
         ScriptEngineManager mgr = new ScriptEngineManager();
         ScriptEngine engine = mgr.getEngineByName("JavaScript");
         Object eval = null;
