@@ -1,4 +1,4 @@
-package ua.com.juja;
+package ua.com.juja.version_1;
 
 import org.junit.Before;
 import org.junit.Ignore;

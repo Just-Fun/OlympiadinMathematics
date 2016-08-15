@@ -1,7 +1,6 @@
-package ua.com.juja;
+package ua.com.juja.version_1;
 
 import java.io.*;
-import java.util.Arrays;
 
 /**
  * Created by Serzh on 8/12/16.

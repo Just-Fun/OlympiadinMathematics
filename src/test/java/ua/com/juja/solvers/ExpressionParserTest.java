@@ -1,7 +1,6 @@
 package ua.com.juja.solvers;
 
 import org.junit.Test;
-import ua.com.juja.solvers.ExpressionParser;
 
 import static org.junit.Assert.*;
 

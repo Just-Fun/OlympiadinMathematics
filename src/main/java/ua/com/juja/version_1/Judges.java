@@ -1,6 +1,5 @@
-package ua.com.juja;
+package ua.com.juja.version_1;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
