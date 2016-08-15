@@ -12,30 +12,28 @@ import java.util.List;
  */
 public class Logic2 {
     private File output;
-    long speed;
+    private static volatile int nextTask = 0;
 
     List<Student> students = new ArrayList<>();
     List<String> tasks = new ArrayList<>();
 
     ThreadGroup tg = new ThreadGroup("threadGroup");
 
-    int taskLength;
-    static volatile int nextTask = 0;
+    private int taskLength;
 
-    public synchronized int getNextTask() {
+    private synchronized int getNextTask() {
         return nextTask++;
     }
 
-    public void run(File input, File output, long sleepTime) {
+    public void run(File input, File output) {
         this.output = output;
-        this.speed = sleepTime;
         Utils.clearFile(output);
         createNamesAndTasksFromFile(input);
         createAndStartThreads(students);
         winners();
     }
 
-    public void createNamesAndTasksFromFile(File input) {
+    private void createNamesAndTasksFromFile(File input) {
         try (BufferedReader br = new BufferedReader(new FileReader(input))) {
             String line;
             boolean task = false;
@@ -59,21 +57,15 @@ public class Logic2 {
         }
     }
 
-    public void createAndStartThreads(List<Student> students) {
+    private void createAndStartThreads(List<Student> students) {
         for (Student student : students) {
-            Thread thread = new Thread(tg, () -> {
+            new Thread(tg, () -> {
                 int taskIndex = getNextTask();
                 while (taskIndex < taskLength) {
                     takeTask(student, taskIndex);
-                    try {
-                        Thread.sleep(speed);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     taskIndex = getNextTask();
                 }
-            })/*.start()*/;
-            thread.start();
+            }).start();
         }
     }
 
@@ -84,6 +76,7 @@ public class Logic2 {
                 Judges2 judges = new Judges2(students);
 //                System.out.println("судьи считают");
                 String result = judges.getWinners();
+                Utils.writeResultInFile(output.getAbsolutePath(), "Winners:");
                 Utils.writeResultInFile(output.getAbsolutePath(), result);
                 end = true;
             }
@@ -91,24 +84,24 @@ public class Logic2 {
     }
 
     private void takeTask(Student student, int taskIndex) {
-        String task = tasks.get(taskIndex);
-        System.out.println(student.getName() + " взял задание №" + (taskIndex + 1) + ": " + task);
+        System.out.println(student.getName() + " started to task №" + (taskIndex + 1));
         resolveTask(student, taskIndex);
     }
 
     private void resolveTask(Student student, int taskIndex) {
-        String name = student.getName();
-        String task = tasks.get(taskIndex);
         Example solver = new ExampleSolver();
+        String task = tasks.get(taskIndex);
         long start = System.nanoTime();
         // Разные реализации:
 //        String countResult = ExpressionParser.run(task);
 //        String countResult = ExampleSolver.count(task);
         String countResult = solver.count(task);
         long spentTime = System.nanoTime() - start;
-        System.out.println(name + " потратил на решение задания №" + (taskIndex + 1) + ": " + spentTime + " наносекунд , ответ: " + countResult + ",  ");
+
+        String name = student.getName();
+        System.out.println(name + " spent on task №" + (taskIndex + 1) + ": " + spentTime + " nanoseconds , result: " + task + " = "+ countResult + ",  ");
         student.incrementSpentTimeAndResolvedTasks(spentTime);
-        String stringInFile =  name + ";" + task + ";" + countResult + "\n";
+        String stringInFile = name + ";" + task + ";" + countResult + "\n";
         Utils.writeResultInFile(output.getAbsolutePath(), stringInFile);
     }
 }

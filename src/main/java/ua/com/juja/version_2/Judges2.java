@@ -1,8 +1,7 @@
 package ua.com.juja.version_2;
 
-import ua.com.juja.version_1.Logic;
-import ua.com.juja.version_1.MapUtil;
-
+import java.io.File;
+import java.util.stream.Collectors;
 import java.util.*;
 
 /**
@@ -16,29 +15,26 @@ public class Judges2 {
     }
 
     public String getWinners() {
-//        students.sort(Comparator.comparing(a -> a.getNumberResolvedTasks()));
-//        students.sort(Comparator.comparing(Student::getNumberResolvedTasks));
-//        Collections.sort(students, (b1, b2) -> (b2.getNumberResolvedTasks() - b1.getNumberResolvedTasks()));
+        Comparator<Student> comparator = Comparator
+                .comparing(Student::getNumberResolvedTasks).reversed()
+                .thenComparing(Student::getSpentTimeOnTasks);
 
-        System.out.println("\nТройка победителей:");
-        students.stream()
-                .sorted((s1, s2) -> (s2.getNumberResolvedTasks() - s1.getNumberResolvedTasks()))
-                .map(Student::getName)
+        List<Student> winners = students.stream()
+                .sorted(comparator)
                 .limit(3)
-                .forEach(System.out::println);
-        ;
+                .collect(Collectors.toList());
 
         String result = "";
-        for (int i = 0; i < 3; i++) {
-            Student student = students.get(i);
-            String name = student.getName();
-            int numberOfTasks = student.getNumberResolvedTasks();
-            Long spentTime = student.getSpentTimeOnTasks();
+        for (Student winner : winners) {
+            String name = winner.getName();
+            int numberOfTasks = winner.getNumberResolvedTasks();
+            Long spentTime = winner.getSpentTimeOnTasks();
             result += name + ";" + String.valueOf(numberOfTasks) + ";" + String.valueOf(spentTime) + "\n";
         }
-//        Utils.writeResultInFile(output.getAbsolutePath(), result);
-        System.out.println("\nТройка победителей: \n" + result);
-//        students.forEach(System.out::println);
+        System.out.println("\nТройка победителей:");
+        winners.stream()
+                .map(student -> student.getName())
+                .forEach(System.out::println);
         return result;
-}
+    }
 }

@@ -22,8 +22,8 @@ public class Main2 {
     public static void main(String[] args) {
         File input = new File("src/main/resources/input.txt");
         File output = new File("src/main/resources/output.txt");
-        long speed = 100;
+
         Logic2 logic = new Logic2();
-        logic.run(input, output, speed);
+        logic.run(input, output);
     }
 }

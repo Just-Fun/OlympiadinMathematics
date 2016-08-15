@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Created by Serzh on 8/15/16.
  */
-public class Utils {
+public class Utils { // TODO в конструкторе указать пути к файлам...
 
     public static void clearFile(File output) {
         BufferedWriter out;
@@ -25,7 +25,7 @@ public class Utils {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(str);
             writer.flush();
-            System.out.print("Записано: \n" + str);
+//            System.out.print("Записано: \n" + str);
         } catch (IOException e1) {
             throw new RuntimeException("Не вышло записать в файл по причине: ", e1.getCause());
         }
