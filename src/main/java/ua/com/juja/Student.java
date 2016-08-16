@@ -8,7 +8,6 @@ public class Student {
     private long spentTimeOnTasks;
     private int numberResolvedTasks;
 
-
     public Student(String name) {
         this.name = name;
         spentTimeOnTasks = 0;
