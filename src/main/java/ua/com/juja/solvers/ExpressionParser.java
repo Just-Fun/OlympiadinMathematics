@@ -8,7 +8,14 @@ import java.util.ArrayList;
 
 import java.util.*;
 
+// TODO доработать - не делить на дробное число и не работает с отрицательными числами
 public class ExpressionParser implements Solver {
+
+    public static void main(String[] args) {
+        ExpressionParser parser = new ExpressionParser();
+        String result = parser.count("2.0/2.0");
+        System.out.println(result);
+    }
     // Associativity constants for operators
     private static final int LEFT_ASSOC = 0;
     private static final int RIGHT_ASSOC = 1;
@@ -29,9 +36,9 @@ public class ExpressionParser implements Solver {
         String[] input = task.split("");
         String[] output = infixToRPN(input);
         Double result = RPNtoDouble(output);
-//        double roundOff = Math.round(result * 100.0) / 100.0;
         double roundOff = Math.ceil(result * 100.0) / 100.0;
-        return String.valueOf(roundOff);
+        String string = String.valueOf(roundOff);
+        return (string.substring(string.length() - 2)).equals(".0") ? string.substring(0, string.length() - 2) : string;
     }
 
     // Test if token is an operator
@@ -62,8 +69,8 @@ public class ExpressionParser implements Solver {
 
     // Convert infix expression format into reverse Polish notation
     public static String[] infixToRPN(String[] inputTokens) {
-        ArrayList<String> out = new ArrayList<String>();
-        Stack<String> stack = new Stack<String>();
+        ArrayList<String> out = new ArrayList<>();
+        Stack<String> stack = new Stack<>();
 
         // For each token
         for (String token : inputTokens) {

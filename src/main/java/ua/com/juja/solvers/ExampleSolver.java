@@ -5,6 +5,8 @@ import java.util.Stack;
 public class ExampleSolver implements Solver {
     public static void main(String[] args) {
         Solver solver = new ExampleSolver();
+        String result = solver.count("2/2.1");
+        System.out.println(result);
         String arr = "35+40*2/(10-5)";
         System.out.println(solver.count(arr));
         arr = "35+40*2/(10-3)";
