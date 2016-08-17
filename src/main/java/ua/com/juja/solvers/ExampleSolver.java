@@ -2,11 +2,14 @@ package ua.com.juja.solvers;
 
 import java.util.Stack;
 
+// TODO доработать - для выражении с пробелами
 public class ExampleSolver implements Solver {
     public static void main(String[] args) {
         Solver solver = new ExampleSolver();
         String result = solver.count("2/2.1");
         System.out.println(result);
+//        String result2 = solver.count("2 / 2.1");
+//        System.out.println(result2);
         String arr = "35+40*2/(10-5)";
         System.out.println(solver.count(arr));
         arr = "35+40*2/(10-3)";

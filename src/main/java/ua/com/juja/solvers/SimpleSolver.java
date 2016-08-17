@@ -6,6 +6,7 @@ import javax.script.ScriptException;
 /**
  * Created by Serzh on 8/12/16.
  */
+// компактно, но медленно...
 public class SimpleSolver implements Solver {
 
     @Override
@@ -20,6 +21,7 @@ public class SimpleSolver implements Solver {
         }
         double d = Double.valueOf(eval.toString());
         double roundOff = Math.ceil(d * 100.0) / 100.0;
-        return String.valueOf(roundOff);
+        String string = String.valueOf(roundOff);
+        return (string.substring(string.length() - 2)).equals(".0") ? string.substring(0, string.length() - 2) : string;
     }
 }

@@ -22,9 +22,9 @@ public class Main {
     public static void main(String[] args) {
         File namesAndTasks = new File("src/main/resources/input.txt");
         File output = new File("src/main/resources/output.txt");
-        Solver solver = new ExampleSolver();
-//        Solver solver = new SimpleSolver();
-//        Solver solver = new ExpressionParser(); // TODO допилить для отрицательных чисел
+        Solver solver = new SimpleSolver();
+//        Solver solver = new ExampleSolver();
+//        Solver solver = new ExpressionParser();
 
         Logic logic = new Logic(namesAndTasks, output, solver);
         logic.run();

@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 import java.util.*;
 
-// TODO доработать - не делить на дробное число и не работает с отрицательными числами
+// TODO доработать - для дробных, отрицательных чисел и пробелов в выражении
 public class ExpressionParser implements Solver {
 
     public static void main(String[] args) {
         ExpressionParser parser = new ExpressionParser();
-        String result = parser.count("2.0/2.0");
+        String result = parser.count("2/2");
         System.out.println(result);
     }
     // Associativity constants for operators
