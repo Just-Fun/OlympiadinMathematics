@@ -6,7 +6,7 @@ import javax.script.ScriptException;
 /**
  * Created by Serzh on 8/12/16.
  */
-// компактно, но медленно...
+// медленный на больших объемах данных
 public class SimpleSolver implements Solver {
 
     @Override

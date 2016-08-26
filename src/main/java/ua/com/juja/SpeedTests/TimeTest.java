@@ -1,4 +1,4 @@
-package ua.com.juja.forTests;
+package ua.com.juja.SpeedTests;
 
 import ua.com.juja.solvers.Solver;
 import ua.com.juja.solvers.ExampleSolver;

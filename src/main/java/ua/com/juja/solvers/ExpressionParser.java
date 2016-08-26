@@ -1,13 +1,11 @@
 package ua.com.juja.solvers;
 
-/**
- * Created by Serzh on 8/13/16.
- */
-
 import java.util.ArrayList;
 
 import java.util.*;
-
+/**
+ * Created by Serzh on 8/13/16.
+ */
 // TODO доработать - для дробных, отрицательных чисел и пробелов в выражении
 public class ExpressionParser implements Solver {
 
