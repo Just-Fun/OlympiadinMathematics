@@ -1,4 +1,4 @@
-package ua.com.juja;
+package ua.com.juja.model;
 
 /**
  * Created by Serzh on 8/14/16.

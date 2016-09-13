@@ -2,7 +2,7 @@ package ua.com.juja.solvers;
 
 import java.util.Stack;
 
-// TODO доработать - для выражении с пробелами
+// TODO if time - realize for expressions with space
 public class ExampleSolver implements Solver {
     public static void main(String[] args) {
         Solver solver = new ExampleSolver();

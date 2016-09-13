@@ -1,4 +1,4 @@
-package ua.com.juja;
+package ua.com.juja.model;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,7 +26,7 @@ public class Utils {
             writer.write(str);
             writer.flush();
         } catch (IOException e1) {
-            throw new RuntimeException("Не вышло записать в файл по причине: ", e1.getCause());
+            throw new RuntimeException("Do not write to a file, because of: ", e1.getCause());
         }
     }
 }

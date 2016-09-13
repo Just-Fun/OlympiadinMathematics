@@ -1,12 +1,10 @@
-package ua.com.juja;
+package ua.com.juja.model;
 
 import ua.com.juja.solvers.Solver;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static ua.com.juja.Utils.*;
 
 /**
  * Created by Serzh on 8/12/16.
@@ -35,7 +33,7 @@ public class Logic {
     }
 
     public void run() {
-        clearFile(output);
+        Utils.clearFile(output);
         createNamesAndTasksFromFile();
         createAndStartThreads(students);
         boolean end = false;
@@ -65,7 +63,7 @@ public class Logic {
             }
             taskLength = tasks.size();
         } catch (FileNotFoundException ex) {
-            throw new RuntimeException("Не верный путь к файлу: " + ex.getLocalizedMessage());
+            throw new RuntimeException("Invalid file path: " + ex.getLocalizedMessage());
         } catch (IOException e) {
             throw new RuntimeException("IOException: " + e.getLocalizedMessage());
         }
@@ -98,13 +96,13 @@ public class Logic {
         System.out.printf("%s spent on task №%d: %d nanoseconds , result: %s = %s,  %n", name, taskIndex + 1, spentTime, task, countResult);
         student.incrementSpentTimeAndResolvedTasks(spentTime);
         String stringInFile = String.format("%s;%s;%s\n", name, task, countResult);
-        writeResultInFile(outputPath, stringInFile);
+        Utils.writeResultInFile(outputPath, stringInFile);
     }
 
     private void winners() {
         Judges judges = new Judges(students);
         String result = judges.getWinners();
-        writeResultInFile(outputPath, "Winners:\n");
-        writeResultInFile(outputPath, result);
+        Utils.writeResultInFile(outputPath, "Winners:\n");
+        Utils.writeResultInFile(outputPath, result);
     }
 }

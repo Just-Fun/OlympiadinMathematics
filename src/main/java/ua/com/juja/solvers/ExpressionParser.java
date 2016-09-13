@@ -3,10 +3,11 @@ package ua.com.juja.solvers;
 import java.util.ArrayList;
 
 import java.util.*;
+
 /**
  * Created by Serzh on 8/13/16.
  */
-// TODO доработать - для дробных, отрицательных чисел и пробелов в выражении
+// TODO if time, modify - for fractions, negative numbers and gaps in terms
 public class ExpressionParser implements Solver {
 
     public static void main(String[] args) {
@@ -14,6 +15,7 @@ public class ExpressionParser implements Solver {
         String result = parser.count("2/2");
         System.out.println(result);
     }
+
     // Associativity constants for operators
     private static final int LEFT_ASSOC = 0;
     private static final int RIGHT_ASSOC = 1;
@@ -133,7 +135,6 @@ public class ExpressionParser implements Solver {
                 stack.push(String.valueOf(result));
             }
         }
-
         return Double.valueOf(stack.pop());
     }
 }

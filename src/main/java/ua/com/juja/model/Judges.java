@@ -1,4 +1,4 @@
-package ua.com.juja;
+package ua.com.juja.model;
 
 import java.util.stream.Collectors;
 import java.util.*;
@@ -22,7 +22,6 @@ public class Judges {
                 .comparing(Student::getNumberResolvedTasks).reversed()
                 .thenComparing(Student::getSpentTimeOnTasks);
 
-//        List<Student> winners = students.stream()
         List<Student> winners = students.parallelStream()
                 .sorted(comparator)
                 .limit(3)

@@ -1,5 +1,6 @@
 package ua.com.juja;
 
+import ua.com.juja.model.Logic;
 import ua.com.juja.solvers.*;
 
 import java.io.File;
@@ -8,15 +9,15 @@ import java.io.File;
  * Created by Serzh on 8/12/16.
  */
 /*
- 1. Два и более ученика не могут решать одну и ту же задачу, то есть поток должен не просто прочитать задачу из файла,
- а прочитать и забрать себе первую задачу какую ещё никто не забрал.
- 2. Результаты решения задач следует округлять до второго знака после запятой.
- 3. Числа в задачах целые и положительные
- Дополнительные задания:
- Числа в задачах могут быть дробными и отрицательными.
- В конце выходного файла вывести тройку лидеров (кто больше задач сделал)
- с количеством решенных задача и временем выполнения задач. Формат вывода:
- Имя ученика;количество решенных задач;время выполнения задач
+ 1. Two or more students can not solve the same problem, that is, the flow should not just read the task from a file,
+ and read and pick up a first task which still has not been taken away.
+ 2. The results of solving problems should be rounded to the second decimal place.
+ 3. The numbers in the problems of the whole and positive
+ Additional tasks:
+ The numbers in the problems can be fractional or negative.
+ At the end of the output file to bring the three leaders (who did more tasks)
+ with the amount of solution to the problem of time and tasks. Output Format:
+ Name student; the number of solved problems; task time
 */
 public class Main {
     public static void main(String[] args) {
