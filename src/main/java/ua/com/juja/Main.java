@@ -27,7 +27,7 @@ public class Main {
 //        Solver solver = new ExampleSolver();
 //        Solver solver = new ExpressionParser();
 
-        Competition logic = new Competition(namesAndTasks, output, solver);
-        logic.run();
+        Competition competition = new Competition(namesAndTasks, output, solver);
+        competition.run();
     }
 }
