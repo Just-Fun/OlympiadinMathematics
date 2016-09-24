@@ -10,8 +10,8 @@ import java.util.List;
  * Created by Serzh on 8/12/16.
  */
 public class Competition {
-    private File output;
     private File input;
+    private File output;
     private String outputPath;
     private Solver solver;
     private static volatile int nextTask = 0;
