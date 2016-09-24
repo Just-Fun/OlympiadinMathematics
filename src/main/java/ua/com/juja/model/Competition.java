@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Serzh on 8/12/16.
  */
-public class Logic {
+public class Competition {
     private File output;
     private File input;
     private String outputPath;
@@ -25,7 +25,7 @@ public class Logic {
         return nextTask++;
     }
 
-    public Logic(File namesAndTasks, File output, Solver solver) {
+    public Competition(File namesAndTasks, File output, Solver solver) {
         this.input = namesAndTasks;
         this.output = output;
         outputPath = output.getAbsolutePath();

@@ -8,8 +8,6 @@ public class ExampleSolver implements Solver {
         Solver solver = new ExampleSolver();
         String result = solver.count("2/2.1");
         System.out.println(result);
-//        String result2 = solver.count("2 / 2.1");
-//        System.out.println(result2);
         String arr = "35+40*2/(10-5)";
         System.out.println(solver.count(arr));
         arr = "35+40*2/(10-3)";
@@ -22,6 +20,8 @@ public class ExampleSolver implements Solver {
         System.out.println(solver.count(arr));
         arr = "-2+2";
         System.out.println(solver.count(arr));
+//        String result2 = solver.count("2 / 2.1");
+//        System.out.println(result2);
     }
 
     @Override

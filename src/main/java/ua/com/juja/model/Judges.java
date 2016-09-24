@@ -14,9 +14,6 @@ public class Judges {
     }
 
     public String getWinners() {
-//        students.sort(Comparator.comparing(a -> a.getNumberResolvedTasks()));
-//        students.sort(Comparator.comparing(Student::getNumberResolvedTasks).reversed());
-//        Collections.sort(students, (b1, b2) -> (b2.getNumberResolvedTasks()));
 
         Comparator<Student> comparator = Comparator
                 .comparing(Student::getNumberResolvedTasks).reversed()

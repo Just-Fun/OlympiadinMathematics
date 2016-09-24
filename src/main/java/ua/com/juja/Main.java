@@ -1,6 +1,6 @@
 package ua.com.juja;
 
-import ua.com.juja.model.Logic;
+import ua.com.juja.model.Competition;
 import ua.com.juja.solvers.*;
 
 import java.io.File;
@@ -27,7 +27,7 @@ public class Main {
 //        Solver solver = new ExampleSolver();
 //        Solver solver = new ExpressionParser();
 
-        Logic logic = new Logic(namesAndTasks, output, solver);
+        Competition logic = new Competition(namesAndTasks, output, solver);
         logic.run();
     }
 }
