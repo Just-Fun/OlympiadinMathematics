@@ -26,7 +26,7 @@ public class Utils {
             writer.write(str);
             writer.flush();
         } catch (IOException e1) {
-            throw new RuntimeException("Do not write to a file, because of: ", e1.getCause());
+            throw new RuntimeException("Did not write to a file, because of: ", e1.getCause());
         }
     }
 }

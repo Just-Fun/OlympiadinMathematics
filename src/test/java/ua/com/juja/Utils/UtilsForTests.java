@@ -1,4 +1,4 @@
-package ua.com.juja.UtilsForTests;
+package ua.com.juja.Utils;
 
 import java.io.*;
 
