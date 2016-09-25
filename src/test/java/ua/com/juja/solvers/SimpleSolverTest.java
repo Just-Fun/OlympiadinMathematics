@@ -20,5 +20,4 @@ public class SimpleSolverTest {
         assertEquals(String.valueOf(-2.5), solver.count("-5/2"));
         assertEquals(String.valueOf(-2.5), solver.count(" -5 / 2"));
     }
-
 }

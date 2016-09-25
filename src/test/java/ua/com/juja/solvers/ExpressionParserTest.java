@@ -21,5 +21,4 @@ public class ExpressionParserTest {
         assertEquals(String.valueOf(0.56), solver.count("4.5/9"));
     }
 
-
 }
