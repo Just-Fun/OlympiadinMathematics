@@ -34,7 +34,7 @@ public class Competition {
 
     public void run() {
         Utils.clearFile(output);
-        createNamesAndTasksFromFile();
+        readFromFile();
         createAndStartThreads(students);
         boolean end = false;
         while (!end) {
@@ -45,20 +45,15 @@ public class Competition {
         }
     }
 
-    private void createNamesAndTasksFromFile() {
+    private void readFromFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(input))) {
-            String line;
             boolean task = false;
+            String line;
             while ((line = br.readLine()) != null) {
                 if (line.equals("#")) {
                     task = true;
                 } else {
-                    if (!task) {
-                        Student student = new Student(line);
-                        students.add(student);
-                    } else {
-                        tasks.add(line);
-                    }
+                    createStudentsAndTasks(line, task);
                 }
             }
             taskLength = tasks.size();
@@ -66,6 +61,15 @@ public class Competition {
             throw new RuntimeException("Invalid file path: " + ex.getLocalizedMessage());
         } catch (IOException e) {
             throw new RuntimeException("IOException: " + e.getLocalizedMessage());
+        }
+    }
+
+    private void createStudentsAndTasks(String line, boolean task) {
+        if (!task) {
+            Student student = new Student(line);
+            students.add(student);
+        } else {
+            tasks.add(line);
         }
     }
 

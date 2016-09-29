@@ -25,7 +25,6 @@ public class Main {
         File output = new File("src/main/resources/output.txt");
         Solver solver = new SimpleSolver();
 //        Solver solver = new ExampleSolver();
-//        Solver solver = new ExpressionParser();
 
         Competition competition = new Competition(namesAndTasks, output, solver);
         competition.run();

@@ -2,29 +2,22 @@ package ua.com.juja.SpeedTests;
 
 import ua.com.juja.solvers.Solver;
 import ua.com.juja.solvers.ExampleSolver;
-import ua.com.juja.solvers.ExpressionParser;
 import ua.com.juja.solvers.SimpleSolver;
 
 public class TimeTest {
     public static void main(String[] args) {
         Solver example = new ExampleSolver();
         System.out.println("ExampleSolver : " + getTime(example));
-        example = new ExpressionParser();
-        System.out.println("ExpressionParser : " + getTime(example));
         example = new SimpleSolver();
         System.out.println("SimpleSolver : " + getTime(example));
 
         example = new ExampleSolver();
         System.out.println("ExampleSolver : " + getTime(example));
-        example = new ExpressionParser();
-        System.out.println("ExpressionParser : " + getTime(example));
         example = new SimpleSolver();
         System.out.println("SimpleSolver : " + getTime(example));
 
         example = new ExampleSolver();
         System.out.println("ExampleSolver : " + getTime(example));
-        example = new ExpressionParser();
-        System.out.println("ExpressionParser : " + getTime(example));
         example = new SimpleSolver();
         System.out.println("SimpleSolver : " + getTime(example));
     }
